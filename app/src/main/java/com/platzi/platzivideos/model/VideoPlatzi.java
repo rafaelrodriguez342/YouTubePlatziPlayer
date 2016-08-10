@@ -1,6 +1,7 @@
 package com.platzi.platzivideos.model;
+import android.content.Context;
 
-import com.platzi.platzivideos.utils.Constants;
+import com.platzi.platzivideos.database.SqlVideoStatesHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ public class VideoPlatzi {
     private String urlImage;
     private String title;
     private String id;
+
 
     public VideoPlatzi(JSONObject json){
         try {
@@ -51,5 +53,15 @@ public class VideoPlatzi {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public VideoState getVideoState(Context context) {
+        SqlVideoStatesHandler db = new SqlVideoStatesHandler(context);
+        return db.getVideoState(getId());
+    }
+
+    public void saveVideoState(VideoState videoState,Context context) {
+        SqlVideoStatesHandler db = new SqlVideoStatesHandler(context);
+        db.addVideoState(videoState,getId());
     }
 }

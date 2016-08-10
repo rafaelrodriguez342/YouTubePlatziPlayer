@@ -1,5 +1,7 @@
 package com.platzi.platzivideos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,9 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.platzi.platzivideos.model.PlayListPlatzi;
+import com.platzi.platzivideos.model.VideoPlatzi;
+import com.platzi.platzivideos.model.VideoState;
 import com.platzi.platzivideos.utils.Constants;
 import com.platzi.platzivideos.utils.Utilities;
 
@@ -17,7 +22,8 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
     private static final int RETRY_CODE = 1;
     private int position=0;
     private YouTubePlayer myYoutubePlayer;
-    private int currentTimeMilliseconds=0;
+    PlayListPlatzi lista;
+    private int currentTimeMilliseconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +31,17 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
         setContentView(R.layout.activity_show_video);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setActionBar(toolbar);
+        configureActionBar();
+        playerView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        playerView.initialize(Constants.YOUTUBE_API_KEY, this);
+        position= getIntent().getIntExtra(Constants.POSITION_EXTRA_KEY, 0);
+        lista=((ApplicationClass) getApplication()).playListPlatzi;
+    }
+
+    private void configureActionBar(){
         getActionBar().setTitle(getString(R.string.title_activity_show_video));
         getActionBar().setDisplayShowHomeEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        playerView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        playerView.initialize(Constants.YOUTUBE_API_KEY, this);
-        position= getIntent().getIntExtra(Constants.POSITION_EXTRA_KEY,0);
     }
 
 
@@ -39,8 +49,7 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
     protected void onResume(){
         super.onResume();
         if(myYoutubePlayer!=null) {
-            Log.d("onResume",currentTimeMilliseconds+"");
-            myYoutubePlayer.loadPlaylist(Constants.YOUTUBE_REQUEST_PLATZI_LIST_ID, position, currentTimeMilliseconds);
+            loadUserPlayList(myYoutubePlayer);
         }
     }
 
@@ -48,8 +57,8 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
     protected void onPause(){
         super.onPause();
         if(myYoutubePlayer!=null){
-            Log.d("onPause",""+myYoutubePlayer.getCurrentTimeMillis());
-            currentTimeMilliseconds=myYoutubePlayer.getCurrentTimeMillis();
+            Log.d("onPause", "" + myYoutubePlayer.getCurrentTimeMillis());
+            saveCurrentState();
         }
     }
 
@@ -58,7 +67,7 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean isRestored) {
         myYoutubePlayer= youTubePlayer;
         if (!isRestored) {
-            youTubePlayer.loadPlaylist(Constants.YOUTUBE_REQUEST_PLATZI_LIST_ID, position, currentTimeMilliseconds);
+            loadUserPlayList(youTubePlayer);
             youTubePlayer.setPlaylistEventListener(this);
             youTubePlayer.setPlayerStateChangeListener(this);
         }
@@ -69,6 +78,24 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
         if (youTubeInitializationResult.isUserRecoverableError()) {
             youTubeInitializationResult.getErrorDialog(this, RETRY_CODE).show();
         }
+    }
+
+    private void loadUserPlayList(YouTubePlayer youTubePlayer){
+        VideoPlatzi videoPlatzi = lista.getItems().get(position);
+        VideoState videoState = videoPlatzi.getVideoState(getApplicationContext());
+        if(videoState==null) {
+            youTubePlayer.loadPlaylist(Constants.YOUTUBE_REQUEST_PLATZI_LIST_ID, position, 0);
+        }else{
+        showConfirmDialog(videoState, youTubePlayer);
+        }
+    }
+
+    private void saveCurrentState(){
+        int initialPosition= getIntent().getIntExtra(Constants.POSITION_EXTRA_KEY, 0);
+        VideoPlatzi videoPlatzi = lista.getItems().get(initialPosition);
+        String currentIdVideo= position!=initialPosition?lista.getItems().get(position).getId():"";
+        VideoState videoState= new VideoState(currentIdVideo,myYoutubePlayer.getCurrentTimeMillis());
+        videoPlatzi.saveVideoState(videoState,getApplicationContext());
     }
 
 
@@ -116,8 +143,9 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
 
     @Override
     public void onVideoStarted() {
-        Log.d("onVideoStarted",""+currentTimeMilliseconds);
-        myYoutubePlayer.seekToMillis(currentTimeMilliseconds);
+        if(myYoutubePlayer.getCurrentTimeMillis()<currentTimeMilliseconds) {
+            myYoutubePlayer.seekToMillis(currentTimeMilliseconds);
+        }
     }
 
     @Override
@@ -140,5 +168,31 @@ public class ShowVideoActivity extends YouTubeBaseActivity implements YouTubePla
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showConfirmDialog(final VideoState videoState,final YouTubePlayer youTubePlayer){
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.alert_notification_title))
+                .setMessage(getString(R.string.alert_wish_to_continue))
+                .setPositiveButton(getString(R.string.alert_positive_answer), new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(!videoState.getCurrentVideo().equals("")){
+                            position=lista.getPositionById(videoState.getCurrentVideo());
+                        }
+                        currentTimeMilliseconds=videoState.getCurrentTime();
+                        youTubePlayer.loadPlaylist(Constants.YOUTUBE_REQUEST_PLATZI_LIST_ID, position, videoState.getCurrentTime());
+                    }
+
+                })
+                .setNegativeButton(getString(R.string.alert_negative_answer), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        youTubePlayer.loadPlaylist(Constants.YOUTUBE_REQUEST_PLATZI_LIST_ID, position, 0);
+                        currentTimeMilliseconds=0;
+                    }
+                })
+                .show();
     }
 }

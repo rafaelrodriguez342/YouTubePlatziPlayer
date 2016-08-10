@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity  implements NetworkResponseL
 
     private void initializeView(){
         playList = new PlayListPlatzi();
+        ((ApplicationClass) getApplication()).playListPlatzi=playList;
         videoListView = (RecyclerView)findViewById(R.id.video_list);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.videos_list_refresh);
         mLayoutManager = new LinearLayoutManager(mContext);

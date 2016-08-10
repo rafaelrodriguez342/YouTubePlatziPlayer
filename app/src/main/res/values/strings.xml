@@ -6,6 +6,11 @@
     <string name="alert_api_description_error">Lo siento ha habido un error accediendo al Api :(</string>
     <string name="alert_no_network_description_error">Lo siento por favor verifique su conexion a internet</string>
     <string name="alert_video_loading_description_error">Lo siento hubo un problema cargando el video, intenta nuevamente</string>
+    <string name="alert_notification_title">Notificación</string>
+    <string name="alert_wish_to_continue">Deseas continuar viendo el video en el estado que lo dejaste?</string>
+    <string name="alert_positive_answer">Si</string>
+    <string name="alert_negative_answer">No</string>
+
 
 
 

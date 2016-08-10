@@ -48,6 +48,13 @@ public class PlayListPlatzi {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    public int getPositionById(String id){
+        for(int i=0; i<items.size();i++){
+            VideoPlatzi video = items.get(i);
+            if(video.getId().equals(id)) return i;
+        }
+        return -1;
     }
 }
