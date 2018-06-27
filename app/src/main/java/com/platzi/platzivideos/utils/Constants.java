@@ -9,5 +9,5 @@ public class Constants {
     public static final String YOUTUBE_REQUEST_MAX_RESULTS = "15";
     public static final String YOUTUBE_REQUEST_FIELDS = "items(contentDetails/videoId,snippet(thumbnails/medium,resourceId/videoId,title)),nextPageToken";
     public static final String YOUTUBE_REQUEST_RESPONSE_TYPE = "snippet";
-    public static final String POSITION_EXTRA_KEY = "position";
+    public static final String VIDEO_EXTRA_KEY = "videoExtraKey";
 }

@@ -1,11 +1,10 @@
-package com.platzi.platzivideos.database;
+package com.platzi.platzivideos.repositories.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.platzi.platzivideos.model.VideoState;
 
@@ -21,7 +20,7 @@ public class SqlVideoStatesHandler extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "videosStates";
 
-    // Contacts table name
+    // Table name
     private static final String TABLE_STATES = "states";
 
     // Contacts Table Columns names
@@ -59,7 +58,7 @@ public class SqlVideoStatesHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
             values.put(KEY_ID, videoId);
-            values.put(KEY_CURRENT_VIDEO, state.getCurrentVideo());
+            values.put(KEY_CURRENT_VIDEO, state.getId());
             values.put(KEY_CURRENT_TIME, String.valueOf(state.getCurrentTime()));
         long ans=db.insert(TABLE_STATES, null, values);
 
@@ -85,7 +84,7 @@ public class SqlVideoStatesHandler extends SQLiteOpenHelper {
     public int updateVideoState(VideoState videoState,String videoId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_CURRENT_VIDEO, videoState.getCurrentVideo());
+        values.put(KEY_CURRENT_VIDEO, videoState.getId());
         values.put(KEY_CURRENT_TIME, videoState.getCurrentTime());
         return db.update(TABLE_STATES, values, KEY_ID + " = ?",
                 new String[] { videoId });

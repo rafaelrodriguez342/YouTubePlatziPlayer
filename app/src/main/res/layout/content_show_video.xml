@@ -9,11 +9,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.platzi.platzivideos.ShowVideoActivity"
+    tools:context="com.platzi.platzivideos.ui.VideoDetailActivity"
     tools:showIn="@layout/activity_show_video">
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youtube_view"
+    <fragment
+        android:id="@+id/youtube_fragment"
+        android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

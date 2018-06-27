@@ -1,0 +1,45 @@
+{
+  "nextPageToken": "CC0QAA",
+  "items": [
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "123Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "456Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "678Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "1777Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "reXLITEI_Xg"
+        }
+      }
+    }
+  ]
+}

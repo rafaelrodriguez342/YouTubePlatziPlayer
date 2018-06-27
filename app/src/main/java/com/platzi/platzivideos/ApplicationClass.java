@@ -1,12 +1,18 @@
 package com.platzi.platzivideos;
 
-import android.app.Application;
+import com.platzi.platzivideos.di.components.DaggerAppComponent;
 
-import com.platzi.platzivideos.model.PlayListPlatzi;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import dagger.android.HasActivityInjector;
 
 /**
  * Created by Rafael on 8/08/16.
  */
-public class ApplicationClass extends Application {
-    public PlayListPlatzi playListPlatzi;
+public class ApplicationClass extends DaggerApplication implements HasActivityInjector {
+
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().create(this);
+    }
 }

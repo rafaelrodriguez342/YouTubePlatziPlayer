@@ -1,0 +1,195 @@
+{
+  "nextPageToken": "CC0QAA",
+  "items": [
+    {
+      "snippet": {
+        "title": "Quiénes y porqué asisten al evento anual de Apple WWDC",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/UJSPLAThppY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "UJSPLAThppY"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Cómo funciona una startup",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/avpHbigVa4Q/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "avpHbigVa4Q"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Bodegas controladas por robots | Entrevista a Fetch Robotics",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/mv65NgkDwg8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "mv65NgkDwg8"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "reXLITEI_Xg"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Microsoft compra GITHUB; novedades en el WWDC2018; Twitter al alza | CvanderNews",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/P-OOd0fV6JM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "P-OOd0fV6JM"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "La historia de Watson, la INTELIGENCIA ARTIFICIAL de IBM",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/g0S5yNR1q8I/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "g0S5yNR1q8I"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Tendencias de INTERNET, Pokémon para Switch; Uber y Airbnb a la bolsa",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/h_nNSlVsDqY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "h_nNSlVsDqY"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Cómo MEMORIZAR rápido y NO OLVIDAR lo que aprendes",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/khXfXYOLfzU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "khXfXYOLfzU"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Las matemáticas del FÚTBOL y los improbables RONALDO y MESSI",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/TiKPGiZdScg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "TiKPGiZdScg"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "¿Qué es GDPR y cómo nos afecta?",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/iYuc-CKZnkI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "iYuc-CKZnkI"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Cómo funciona la suerte",
+        "thumbnails": {
+          "medium": {
+            "url": "https://i.ytimg.com/vi/aelpYjJBrV8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          }
+        },
+        "resourceId": {
+          "videoId": "aelpYjJBrV8"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "123Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "456Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "678Test"
+        }
+      }
+    },
+    {
+      "snippet": {
+        "title": "Private video",
+        "resourceId": {
+          "videoId": "1777Test"
+        }
+      }
+    }
+  ]
+}

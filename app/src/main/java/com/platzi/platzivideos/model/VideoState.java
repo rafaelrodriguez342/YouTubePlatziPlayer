@@ -1,44 +1,50 @@
 package com.platzi.platzivideos.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Rafael on 8/08/16.
  */
+@Entity
 public class VideoState {
-    private String currentVideo="";
-    private int currentTime=0;
 
-    public VideoState (JSONObject json){
-        try {
-            this.setCurrentTime(json.getInt("currentTime"));
-            if(json.has("currentVideo")){
-               this.currentVideo=json.getString("currentVideo");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    @NonNull
+    @PrimaryKey
+    private String id = "";
+
+    @ColumnInfo(name = "current_time")
+    private int currentTime = 0;
+
+    public VideoState(@NonNull String id, int currentTime) {
+        this.id = id;
+        this.currentTime = currentTime;
     }
 
-    public VideoState(String currentVideo,int currentTime){
-        this.currentVideo=currentVideo;
-        this.currentTime=currentTime;
-    }
-
-    public String getCurrentVideo() {
-        return currentVideo;
-    }
-
-    public void setCurrentVideo(String currentVideo) {
-        this.currentVideo = currentVideo;
+    public String getId() {
+        return id;
     }
 
     public int getCurrentTime() {
         return currentTime;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setCurrentTime(int currentTime) {
         this.currentTime = currentTime;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof VideoState)) return false;
+        VideoState otherVideoState = (VideoState) other;
+        return otherVideoState.id.equals(getId()) && otherVideoState.currentTime == getCurrentTime();
     }
 }

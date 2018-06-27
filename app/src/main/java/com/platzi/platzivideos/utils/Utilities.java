@@ -10,13 +10,7 @@ import com.platzi.platzivideos.R;
  */
 public class Utilities {
 
-    public static void showErrorAlertMsg(Context context,int msj){
-        new AlertDialog.Builder(context).setTitle(context.getString(R.string.alert_title_error)).setMessage(context.getString(msj)).setPositiveButton("ok", null).show();
-    }
-
-    public static void showErrorAlertMsg(Context context,String msj){
+    public static void showErrorAlertMsg(Context context, String msj) {
         new AlertDialog.Builder(context).setTitle(context.getString(R.string.alert_title_error)).setMessage(msj).setPositiveButton("ok", null).show();
     }
-
-
 }

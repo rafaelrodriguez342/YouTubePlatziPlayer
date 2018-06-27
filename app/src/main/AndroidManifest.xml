@@ -14,7 +14,7 @@
         android:name=".ApplicationClass"
         >
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowVideoActivity"
+            android:name=".ui.VideoDetailActivity"
             android:label="@string/title_activity_show_video"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -1,4 +1,4 @@
-package com.platzi.platzivideos.network;
+package com.platzi.platzivideos.repositories.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
