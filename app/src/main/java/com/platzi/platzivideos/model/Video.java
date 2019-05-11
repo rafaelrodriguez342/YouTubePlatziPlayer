@@ -1,11 +1,11 @@
 package com.platzi.platzivideos.model;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.platzi.platzivideos.repositories.database.SqlVideoStatesHandler;
-
+/**
+ * Data Model object for Video.
+ */
 public class Video implements Parcelable {
 
     private final String urlImage;

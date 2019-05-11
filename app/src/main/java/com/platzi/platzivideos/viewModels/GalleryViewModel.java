@@ -7,19 +7,21 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.paging.PagedList;
 
 import com.platzi.platzivideos.model.Video;
-import com.platzi.platzivideos.model.VideoInfoListResult;
+import com.platzi.platzivideos.model.VideoListResult;
 import com.platzi.platzivideos.repositories.VideoRepository;
 
 import javax.inject.Inject;
 
+/**
+ * ViewModel Class for GalleryActivity.
+ */
+public class GalleryViewModel extends ViewModel {
 
-public class MainActivityViewModel extends ViewModel {
-
-    private MutableLiveData<VideoInfoListResult> repoResult = new MutableLiveData<>();
-    private LiveData<PagedList<Video>> videoList = Transformations.switchMap(repoResult, input -> input.getVideos());
+    private MutableLiveData<VideoListResult> repoResult = new MutableLiveData<>();
+    private LiveData<PagedList<Video>> videoList = Transformations.switchMap(repoResult, VideoListResult::getVideos);
 
     @Inject
-    public MainActivityViewModel(VideoRepository videoRepository) {
+    public GalleryViewModel(VideoRepository videoRepository) {
         repoResult.setValue(videoRepository.getVideoListInfo());
     }
 

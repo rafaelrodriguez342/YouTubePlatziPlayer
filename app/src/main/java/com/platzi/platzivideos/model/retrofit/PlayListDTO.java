@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Rafael on 3/08/16.
+ * Data transfer Object for PlayList, used in Retrofit api client to parse response.
  */
 public class PlayListDTO {
-    private String nextPageToken = "";
-    private String prevPageToken = "";
+    private final String nextPageToken;
+    private final String prevPageToken;
 
-    private List<VideoDTO> items;
+    private final List<VideoDTO> items;
 
     public PlayListDTO() {
         items = new ArrayList<>();
+        nextPageToken = "";
+        prevPageToken = "";
     }
 
     public List<VideoDTO> getItems() {

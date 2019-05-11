@@ -6,11 +6,10 @@ import org.junit.runner.RunWith;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
 
-import com.platzi.platzivideos.ui.MainActivity;
+import com.platzi.platzivideos.ui.GalleryActivity;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -21,11 +20,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class GalleryActivityTest {
 
     @Test
     public void testDataShown() throws InterruptedException {
-        Intent intent = new Intent(InstrumentationRegistry.getTargetContext(), MainActivity.class);
+        Intent intent = new Intent(InstrumentationRegistry.getTargetContext(), GalleryActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Activity activity = InstrumentationRegistry.getInstrumentation().startActivitySync(intent);
         RecyclerView recyclerView = activity.findViewById(R.id.video_list);

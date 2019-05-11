@@ -6,17 +6,20 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
 import com.platzi.platzivideos.model.Video;
-import com.platzi.platzivideos.model.VideoInfoResult;
+import com.platzi.platzivideos.model.VideoInfo;
 import com.platzi.platzivideos.model.VideoState;
 import com.platzi.platzivideos.repositories.VideoStateRepository;
 
 import javax.inject.Inject;
 
+/**
+ * View Model Class for Video Detail.
+ */
 public class VideoDetailViewModel extends ViewModel {
     private VideoStateRepository videoStateRepository;
     private MutableLiveData<Video> videoLiveData = new MutableLiveData<>();
     private LiveData<VideoState> videoStateLiveData = Transformations.switchMap(videoLiveData, input -> videoStateRepository.getVideoState(input.getId()));
-    private LiveData<VideoInfoResult> videoInfoResultLiveData = Transformations.map(videoStateLiveData, input -> new VideoInfoResult(videoLiveData.getValue(), input));
+    private LiveData<VideoInfo> videoInfoResultLiveData = Transformations.map(videoStateLiveData, input -> new VideoInfo(videoLiveData.getValue(), input));
 
     @Inject
     public VideoDetailViewModel(VideoStateRepository videoStateRepository) {
@@ -34,11 +37,11 @@ public class VideoDetailViewModel extends ViewModel {
         }
     }
 
-    public LiveData<VideoInfoResult> getVideoInfoResultLiveData() {
+    public LiveData<VideoInfo> getVideoInfoResultLiveData() {
         return videoInfoResultLiveData;
     }
 
-    public void reloadVideo(){
+    public void reloadVideo() {
         videoLiveData.setValue(videoLiveData.getValue());
     }
 }

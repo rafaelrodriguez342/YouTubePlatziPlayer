@@ -10,6 +10,9 @@ import java.lang.annotation.Target;
 
 import dagger.MapKey;
 
+/**
+ * Key for hashmap to add a ViewModel into the available ViewModels it should be the .class
+ */
 @Documented
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

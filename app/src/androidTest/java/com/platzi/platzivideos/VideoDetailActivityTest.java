@@ -25,8 +25,5 @@ public class VideoDetailActivityTest {
         InstrumentationRegistry.getInstrumentation().startActivitySync(intent);
         onView(withId(R.id.youtube_fragment))
                 .check(matches(isDisplayed()));
-
-        //onView(withId())
-          //      .check(matches(withText("Test Video")));
     }
 }

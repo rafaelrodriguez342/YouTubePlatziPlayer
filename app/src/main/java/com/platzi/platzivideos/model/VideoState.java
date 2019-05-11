@@ -6,37 +6,30 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 /**
- * Created by Rafael on 8/08/16.
+ * Data Model object for the VideoState.
  */
 @Entity
 public class VideoState {
 
     @NonNull
     @PrimaryKey
-    private String id = "";
+    private String id;
 
     @ColumnInfo(name = "current_time")
-    private int currentTime = 0;
+    private int currentTime;
 
     public VideoState(@NonNull String id, int currentTime) {
         this.id = id;
         this.currentTime = currentTime;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
     public int getCurrentTime() {
         return currentTime;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setCurrentTime(int currentTime) {
-        this.currentTime = currentTime;
     }
 
     @Override

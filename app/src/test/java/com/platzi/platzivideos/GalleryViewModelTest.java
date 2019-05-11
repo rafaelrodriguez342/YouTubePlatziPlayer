@@ -11,7 +11,7 @@ import com.platzi.platzivideos.model.retrofit.PlayListDTO;
 import com.platzi.platzivideos.repositories.VideoRepository;
 import com.platzi.platzivideos.repositories.network.RetrofitApiClient;
 import com.platzi.platzivideos.repositories.network.VideoApiClientRepository;
-import com.platzi.platzivideos.viewModels.MainActivityViewModel;
+import com.platzi.platzivideos.viewModels.GalleryViewModel;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -30,7 +30,7 @@ import static junit.framework.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class MainViewModelTest {
+public class GalleryViewModelTest {
 
     private static final String TEST_VIDEOS_PATH = "videos.json";
     private static final String TEST_EMPTY_VIDEOS_PATH = "empty_videos.json";
@@ -43,13 +43,13 @@ public class MainViewModelTest {
     @Mock
     RetrofitApiClient retrofitApiClient;
 
-    private MainActivityViewModel mainActivityViewModel;
+    private GalleryViewModel galleryViewModel;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         VideoRepository videoRepository = new VideoApiClientRepository(retrofitApiClient);
-        mainActivityViewModel = new MainActivityViewModel(videoRepository);
+        galleryViewModel = new GalleryViewModel(videoRepository);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class MainViewModelTest {
             assertNotNull(videos);
             assertEquals(44, videos.size());
         };
-        mainActivityViewModel.getVideoListLiveData().observeForever(listObserver);
+        galleryViewModel.getVideoListLiveData().observeForever(listObserver);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class MainViewModelTest {
             assertNotNull(videos);
             assertTrue(videos.isEmpty());
         };
-        mainActivityViewModel.getVideoListLiveData().observeForever(listObserver);
+        galleryViewModel.getVideoListLiveData().observeForever(listObserver);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class MainViewModelTest {
             assertNotNull(videos);
             assertEquals(10, videos.size());
         };
-        mainActivityViewModel.getVideoListLiveData().observeForever(listObserver);
+        galleryViewModel.getVideoListLiveData().observeForever(listObserver);
     }
 
     @Test
@@ -89,7 +89,7 @@ public class MainViewModelTest {
             assertNotNull(videos);
             assertTrue(videos.isEmpty());
         };
-        mainActivityViewModel.getVideoListLiveData().observeForever(listObserver);
+        galleryViewModel.getVideoListLiveData().observeForever(listObserver);
     }
 
     private void mockDataSource(String fileName) throws IOException {

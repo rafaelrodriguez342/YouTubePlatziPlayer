@@ -7,6 +7,9 @@ import com.platzi.platzivideos.repositories.VideoStateRepository;
 
 import javax.inject.Inject;
 
+/**
+ * Room Repository for Video States.
+ */
 public class RoomVideoStateRepo implements VideoStateRepository {
 
     private VideoStateDao videoStateDao;

@@ -1,10 +1,18 @@
 package com.platzi.platzivideos.model.retrofit;
 
+/**
+ * Data transfer Object for Snippet, used in Retrofit api client to parse response.
+ */
 public class SnippetDTO {
-    private String title;
-    private ThumbnailDTO thumbnails;
-    private ResourceIdDTO resourceId;
+    private final String title;
+    private final ThumbnailDTO thumbnails;
+    private final ResourceIdDTO resourceId;
 
+    public SnippetDTO() {
+        this.title = "";
+        this.thumbnails = null;
+        this.resourceId = null;
+    }
 
     public String getTitle() {
         return title;

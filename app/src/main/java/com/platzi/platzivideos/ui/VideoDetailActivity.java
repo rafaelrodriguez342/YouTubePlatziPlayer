@@ -15,18 +15,21 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import com.platzi.platzivideos.R;
 import com.platzi.platzivideos.model.Video;
-import com.platzi.platzivideos.model.VideoInfoResult;
+import com.platzi.platzivideos.model.VideoInfo;
 import com.platzi.platzivideos.utils.Constants;
-import com.platzi.platzivideos.utils.Utilities;
+import com.platzi.platzivideos.utils.DialogHelper;
 import com.platzi.platzivideos.viewModels.VideoDetailViewModel;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
+/**
+ * Activity for Display a specific Video.
+ */
 public class VideoDetailActivity extends DaggerAppCompatActivity implements YouTubePlayer.OnInitializedListener, YouTubePlayer.PlaylistEventListener, YouTubePlayer.PlayerStateChangeListener {
-
-    private static final int RETRY_CODE = 1;
+    private static final String VIDEO_EXTRA_KEY = "videoExtraKey";
+    private static final int RETRY_CODE = 1001;
     private YouTubePlayer myYoutubePlayer;
     private int currentTimeMilliseconds;
     private VideoDetailViewModel viewModel;
@@ -45,20 +48,22 @@ public class VideoDetailActivity extends DaggerAppCompatActivity implements YouT
         configureActionBar();
         youTubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
         youTubePlayerFragment.initialize(Constants.YOUTUBE_API_KEY, this);
-        viewModel.initWithVideo(getIntent().getParcelableExtra(Constants.VIDEO_EXTRA_KEY));
+        viewModel.initWithVideo(getIntent().getParcelableExtra(VIDEO_EXTRA_KEY));
         observeLiveData();
     }
 
-    public static Intent createNewIntent(Context context, Video video){
+    public static Intent createNewIntent(Context context, Video video) {
         Intent intent = new Intent(context, VideoDetailActivity.class);
-        intent.putExtra(Constants.VIDEO_EXTRA_KEY, video);
+        intent.putExtra(VIDEO_EXTRA_KEY, video);
         return intent;
     }
 
     private void configureActionBar() {
-        getActionBar().setTitle(getString(R.string.title_activity_show_video));
-        getActionBar().setDisplayShowHomeEnabled(false);
-        getActionBar().setDisplayHomeAsUpEnabled(false);
+        if (getActionBar() != null) {
+            getActionBar().setTitle(getString(R.string.title_activity_show_video));
+            getActionBar().setDisplayShowHomeEnabled(false);
+            getActionBar().setDisplayHomeAsUpEnabled(false);
+        }
     }
 
     @Override
@@ -98,12 +103,12 @@ public class VideoDetailActivity extends DaggerAppCompatActivity implements YouT
         }
     }
 
-    private void loadUserVideo(VideoInfoResult videoInfoResult) {
+    private void loadUserVideo(VideoInfo videoInfo) {
         if (myYoutubePlayer != null) {
-            if (videoInfoResult.getVideoState() == null) {
-                myYoutubePlayer.loadVideo(videoInfoResult.getVideo().getId(), 0);
+            if (videoInfo.getVideoState() == null) {
+                myYoutubePlayer.loadVideo(videoInfo.getVideo().getId(), 0);
             } else {
-                showConfirmDialog(videoInfoResult, myYoutubePlayer);
+                showConfirmDialog(videoInfo, myYoutubePlayer);
             }
         }
     }
@@ -169,7 +174,7 @@ public class VideoDetailActivity extends DaggerAppCompatActivity implements YouT
 
     @Override
     public void onError(YouTubePlayer.ErrorReason errorReason) {
-        Utilities.showErrorAlertMsg(this, errorReason.toString());
+        DialogHelper.showErrorAlertMsg(this, errorReason.toString());
     }
 
     @Override
@@ -182,16 +187,16 @@ public class VideoDetailActivity extends DaggerAppCompatActivity implements YouT
         return super.onOptionsItemSelected(item);
     }
 
-    public void showConfirmDialog(final VideoInfoResult videoInfoResult, final YouTubePlayer youTubePlayer) {
+    public void showConfirmDialog(final VideoInfo videoInfo, final YouTubePlayer youTubePlayer) {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.alert_notification_title))
                 .setMessage(getString(R.string.alert_wish_to_continue))
                 .setPositiveButton(getString(R.string.alert_positive_answer), (dialog, which) -> {
-                    currentTimeMilliseconds = videoInfoResult.getVideoState().getCurrentTime();
-                    youTubePlayer.loadVideo(videoInfoResult.getVideo().getId(), currentTimeMilliseconds);
+                    currentTimeMilliseconds = videoInfo.getVideoState().getCurrentTime();
+                    youTubePlayer.loadVideo(videoInfo.getVideo().getId(), currentTimeMilliseconds);
                 })
                 .setNegativeButton(getString(R.string.alert_negative_answer), (dialog, which) -> {
-                    youTubePlayer.loadVideo(videoInfoResult.getVideo().getId(), 0);
+                    youTubePlayer.loadVideo(videoInfo.getVideo().getId(), 0);
                     currentTimeMilliseconds = 0;
                 })
                 .show();

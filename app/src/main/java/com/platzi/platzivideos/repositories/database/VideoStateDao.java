@@ -9,6 +9,9 @@ import android.arch.persistence.room.Query;
 
 import com.platzi.platzivideos.model.VideoState;
 
+/**
+ * Room interface for Video State DAO.
+ */
 @Dao
 public interface VideoStateDao {
 

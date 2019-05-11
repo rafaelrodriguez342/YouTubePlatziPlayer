@@ -7,7 +7,7 @@ import dagger.android.DaggerApplication;
 import dagger.android.HasActivityInjector;
 
 /**
- * Created by Rafael on 8/08/16.
+ * The Application class.
  */
 public class ApplicationClass extends DaggerApplication implements HasActivityInjector {
 

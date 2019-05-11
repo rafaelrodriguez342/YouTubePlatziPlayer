@@ -1,17 +1,14 @@
 <resources>
-    <string name="app_name">PlatziVideos</string>
+    <string name="app_name">My Videos</string>
     <string name="action_settings">Settings</string>
     <string name="alert_title_error">Ups Error</string>
-    <string name="title_activity_show_video">Tu video</string>
+    <string name="title_activity_show_video">Video Detail</string>
     <string name="alert_api_description_error">Lo siento ha habido un error accediendo al Api :(</string>
     <string name="alert_no_network_description_error">Lo siento por favor verifique su conexion a internet</string>
     <string name="alert_video_loading_description_error">Lo siento hubo un problema cargando el video, intenta nuevamente</string>
-    <string name="alert_notification_title">Notificación</string>
-    <string name="alert_wish_to_continue">Deseas continuar viendo el video en el estado que lo dejaste?</string>
-    <string name="alert_positive_answer">Si</string>
+    <string name="alert_notification_title">Notification</string>
+    <string name="alert_wish_to_continue">do you wish resume the video?</string>
+    <string name="alert_positive_answer">Yes</string>
     <string name="alert_negative_answer">No</string>
-
-
-
 
 </resources>

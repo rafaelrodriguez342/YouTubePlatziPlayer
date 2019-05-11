@@ -1,4 +1,4 @@
-package com.platzi.platzivideos;
+package com.platzi.platzivideos.utils;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -10,13 +10,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-public class PlatziViewModelFactory implements ViewModelProvider.Factory {
+/**
+ * ViewModel Factory to avoid Dagger Injection in our View Models.
+ */
+public class ApplicationViewModelFactory implements ViewModelProvider.Factory {
 
     private final Map<Class<? extends ViewModel>, Provider<ViewModel>> creators;
     public final static String VIEW_MODELS_HASH = "view_models";
 
     @Inject
-    public PlatziViewModelFactory(@Named(VIEW_MODELS_HASH) Map<Class<? extends ViewModel>, Provider<ViewModel>> creators) {
+    public ApplicationViewModelFactory(@Named(VIEW_MODELS_HASH) Map<Class<? extends ViewModel>, Provider<ViewModel>> creators) {
         this.creators = creators;
     }
 

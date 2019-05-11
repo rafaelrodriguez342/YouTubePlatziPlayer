@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 
 /**
- * Created by Rafael on 3/08/16.
+ * Adapter for populate Video List.
  */
 public class VideosAdapter extends PagedListAdapter<Video, VideosAdapter.VideoViewHolder> {
     private ClickListener clickListener;

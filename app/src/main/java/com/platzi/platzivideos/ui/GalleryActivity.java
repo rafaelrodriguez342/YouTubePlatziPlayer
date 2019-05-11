@@ -13,29 +13,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.platzi.platzivideos.R;
-import com.platzi.platzivideos.utils.Constants;
 import com.platzi.platzivideos.ui.adapters.VideosAdapter;
-import com.platzi.platzivideos.viewModels.MainActivityViewModel;
+import com.platzi.platzivideos.viewModels.GalleryViewModel;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
-public class MainActivity extends DaggerAppCompatActivity {
+/**
+ * GalleryActivity containing the Video list.
+ */
+public class GalleryActivity extends DaggerAppCompatActivity {
 
     @Inject
     Context applicationContext;
     @Inject
     ViewModelProvider.Factory viewModelFactory;
     private VideosAdapter videosAdapter;
-    private SwipeRefreshLayout refreshLayout;
-    private MainActivityViewModel viewModel;
+    private GalleryViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GalleryViewModel.class);
         observeLiveData();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,7 +45,6 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     private void initializeView() {
         RecyclerView galleryRecyclerView = findViewById(R.id.video_list);
-        refreshLayout = findViewById(R.id.videos_list_refresh);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(applicationContext);
         galleryRecyclerView.setLayoutManager(mLayoutManager);
         videosAdapter = new VideosAdapter((video, context) -> {

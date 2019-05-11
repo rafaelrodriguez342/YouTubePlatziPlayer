@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 
 import com.platzi.platzivideos.model.Video;
-import com.platzi.platzivideos.model.VideoInfoResult;
+import com.platzi.platzivideos.model.VideoInfo;
 import com.platzi.platzivideos.model.VideoState;
 import com.platzi.platzivideos.repositories.VideoStateRepository;
 import com.platzi.platzivideos.viewModels.VideoDetailViewModel;
@@ -17,7 +17,6 @@ import org.junit.rules.TestRule;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,7 +29,7 @@ public class VideoDetailViewModelTest {
     VideoStateRepository videoStateRepository;
 
     @Mock
-    Observer<VideoInfoResult> videoInfoObserver;
+    Observer<VideoInfo> videoInfoObserver;
 
     private VideoDetailViewModel videoDetailViewModel;
     private Video video;
@@ -44,10 +43,10 @@ public class VideoDetailViewModelTest {
 
     @Test
     public void testInitWithVideo() {
-        VideoInfoResult expectedVideoInfoResult = mockVideoInfoResult(0, video);
+        VideoInfo expectedVideoInfo = mockVideoInfoResult(0, video);
         videoDetailViewModel.getVideoInfoResultLiveData().observeForever(videoInfoObserver);
         videoDetailViewModel.initWithVideo(video);
-        verify(videoInfoObserver).onChanged(expectedVideoInfoResult);
+        verify(videoInfoObserver).onChanged(expectedVideoInfo);
     }
 
     @Test
@@ -60,20 +59,20 @@ public class VideoDetailViewModelTest {
 
     @Test
     public void testReloadVideo() {
-        VideoInfoResult expectedVideoInfoResult = mockVideoInfoResult(2000, video);
+        VideoInfo expectedVideoInfo = mockVideoInfoResult(2000, video);
         videoDetailViewModel.getVideoInfoResultLiveData().observeForever(videoInfoObserver);
         videoDetailViewModel.initWithVideo(video);
-        verify(videoInfoObserver).onChanged(expectedVideoInfoResult);
+        verify(videoInfoObserver).onChanged(expectedVideoInfo);
         videoDetailViewModel.reloadVideo();
-        verify(videoInfoObserver).onChanged(expectedVideoInfoResult);
+        verify(videoInfoObserver).onChanged(expectedVideoInfo);
     }
 
-    private VideoInfoResult mockVideoInfoResult(int currentTime, Video video) {
+    private VideoInfo mockVideoInfoResult(int currentTime, Video video) {
         VideoState videoState = new VideoState(video.getId(), currentTime);
-        VideoInfoResult expectedVideoInfoResult = new VideoInfoResult(video, videoState);
+        VideoInfo expectedVideoInfo = new VideoInfo(video, videoState);
         MutableLiveData<VideoState> videoStateLiveData = new MutableLiveData<>();
         videoStateLiveData.setValue(videoState);
         when(videoStateRepository.getVideoState(video.getId())).thenReturn(videoStateLiveData);
-        return expectedVideoInfoResult;
+        return expectedVideoInfo;
     }
 }
